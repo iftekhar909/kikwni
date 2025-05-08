@@ -41,7 +41,7 @@ export default function PostPage({
   return (
     <Layout>
       <SEO
-        title={`${frontMatter.title} - ${globalData.name}`}
+        title={`${frontMatter.title|| null} - ${globalData.name}`}
         description={frontMatter.description}
       />
       <Header name={globalData.name} />
@@ -51,7 +51,7 @@ export default function PostPage({
             className="mb-12 text-3xl text-center md:text-5xl dark:text-white"
             data-sb-field-path="title"
           >
-            {frontMatter.title}
+            {frontMatter.title|| null}
           </h1>
           {frontMatter.description && (
             <p className="mb-4 text-xl" data-sb-field-path="description">
@@ -114,8 +114,8 @@ export default function PostPage({
 export const getStaticProps = async ({ params }) => {
   const globalData = getGlobalData();
   const { mdxSource, data } = await getPostBySlug(params.slug);
-  const prevPost = getPreviousPostBySlug(params.slug);
-  const nextPost = getNextPostBySlug(params.slug);
+  const prevPost = getPreviousPostBySlug(params.slug);|| null;
+  const nextPost = getNextPostBySlug(params.slug);|| null;
 
   return {
     props: {
